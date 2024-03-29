@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const mysql = require('mysql2/promise');
 const { dbConfig } = require('./config');
+const jobsRouter = require('./routes/jobsRoutes');
 
 const app = express();
 
@@ -18,21 +19,9 @@ app.get('/', (req, res) => {
   res.json('Hello World');
 });
 
-testConnection();
-// connect
-async function testConnection() {
-  let conn;
-  try {
-    conn = await mysql.createConnection(dbConfig);
-    await conn.query('SELECT 1');
-    console.log('Succesfuly connected to mysql');
-  } catch (error) {
-    console.log('testConnection failed, did you start XAMPP mate???');
-    console.log(error);
-  } finally {
-    if (conn) conn.end();
-  }
-}
+// routes
+
+app.use('/jobs', jobsRouter);
 
 app.listen(PORT, () => {
   console.log(`Server runing on http://localhost:${PORT}`);
