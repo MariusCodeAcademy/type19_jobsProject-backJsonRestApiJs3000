@@ -5,3 +5,7 @@ GET http://localhost:3000
 GET http://localhost:3000/jobs
 
 ###
+// GET /jobs grazina visas darbo vietas
+GET http://localhost:3000/jobs/2
+
+###
